@@ -3,6 +3,7 @@ from sqlalchemy import text
 from database import Base, engine
 import models
 from database import engine
+from routes import router
 
 app = FastAPI(
     title="AI Service Desk Copilot API",
@@ -10,6 +11,7 @@ app = FastAPI(
 )
 
 Base.metadata.create_all(bind=engine)
+app.include_router(router)
 
 @app.get("/")
 def root():
