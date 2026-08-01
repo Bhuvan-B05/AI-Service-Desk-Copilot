@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from sqlalchemy import text
-
+from database import Base, engine
+import models
 from database import engine
 
 app = FastAPI(
@@ -8,6 +9,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
+Base.metadata.create_all(bind=engine)
 
 @app.get("/")
 def root():
