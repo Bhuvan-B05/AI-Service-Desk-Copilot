@@ -1,20 +1,36 @@
+# ----------------------------
 # Python
-backend/.venv/
-backend/__pycache__/
-backend/*.pyc
+# ----------------------------
+.venv/
+**/__pycache__/
+*.py[cod]
+.env
 
-# Environment variables
-backend/.env
+# ----------------------------
+# Node / React
+# ----------------------------
+**/node_modules/
+**/dist/
 
-# Node
-frontend/node_modules/
-
-# Vite
-frontend/dist/
-
+# ----------------------------
 # VS Code
+# ----------------------------
 .vscode/
 
-# OS
+# ----------------------------
+# Operating System
+# ----------------------------
 .DS_Store
 Thumbs.db
+
+# ----------------------------
+# Logs
+# ----------------------------
+*.log
+
+# ----------------------------
+# Build / Cache
+# ----------------------------
+.pytest_cache/
+.mypy_cache/
+.coverage
