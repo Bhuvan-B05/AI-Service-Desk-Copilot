@@ -163,13 +163,33 @@ VITE_API_URL=
 
 ## 📷 Screenshots
 
-Coming Soon
+### Login
 
-- Login Page
-- Dashboard
-- Ticket Creation
-- AI Analysis
+![Login](screenshots/login.png)
 
+---
+
+### Registration
+
+![Registration](screenshots/register.png)
+
+---
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### Create Ticket
+
+![Create Ticket](screenshots/create-ticket.png)
+
+---
+
+### AI Ticket Analysis
+
+![Analysis](screenshots/analysis.png)
 ---
 
 ## 📈 Future Improvements
