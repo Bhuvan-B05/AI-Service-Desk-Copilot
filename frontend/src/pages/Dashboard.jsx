@@ -12,6 +12,7 @@ function Dashboard() {
     const [description, setDescription] = useState("");
 
     const [loadingAI, setLoadingAI] = useState(null);
+    const [creating, setCreating] = useState(false);
 
     const [stats, setStats] = useState({});
 
@@ -51,6 +52,8 @@ function Dashboard() {
 
         try {
 
+            setCreating(true);
+
             await api.post("/tickets", {
                 title,
                 description,
@@ -63,7 +66,13 @@ function Dashboard() {
             await loadDashboard();
 
         } catch (err) {
+
             console.log(err);
+
+        } finally {
+
+            setCreating(false);
+
         }
     }
 
@@ -99,7 +108,6 @@ function Dashboard() {
         } catch (err) {
 
             console.log(err);
-            alert("AI Analysis Failed");
 
         } finally {
 
@@ -279,8 +287,11 @@ function Dashboard() {
                         required
                     />
 
-                    <button type="submit">
-                        Create Ticket
+                    <button
+                        type="submit"
+                        disabled={creating}
+                    >
+                        {creating ? "Creating..." : "Create Ticket"}
                     </button>
 
                 </form>
