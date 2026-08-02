@@ -89,29 +89,49 @@ Return ONLY JSON.
 
     start = time.perf_counter()
 
-    response = client.chat.completions.create(
-        model=AI_MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a Senior Enterprise IT Service Desk Engineer."
-                    "Base your analysis on standard enterprise troubleshooting practices."
-                    "If the exact cause is uncertain, use words like 'Likely' or 'Possible'."
-                   " Return ONLY valid JSON."
-                )
+    try:
+
+        response = client.chat.completions.create(
+            model=AI_MODEL,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a Senior Enterprise IT Service Desk AI. "
+                        "Return ONLY valid JSON. "
+                        "Do not include explanations, reasoning, markdown, or code fences."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                },
+            ],
+            response_format={
+                "type": "json_object"
             },
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        temperature=0,
-        max_tokens=500,
-    )
+            temperature=0,
+            max_tokens=700,
+        )
+
+    except Exception as e:
+
+        print("\n========== AI PROVIDER ERROR ==========")
+        print(e)
+        print("=======================================\n")
+
+        return {
+            "category": "Unknown",
+            "priority": "Medium",
+            "severity": "Minor",
+            "summary": "AI service temporarily unavailable.",
+            "root_cause": "The AI provider returned an error.",
+            "resolution": "Retry analysis later or classify manually.",
+            "assigned_team": "IT Operations",
+            "estimated_time": "Unknown"
+        }
 
     print(f"AI Time: {time.perf_counter() - start:.2f}s")
-
     # ---------- DEBUG ----------
     print("\n========== RAW RESPONSE ==========")
     print(response)
